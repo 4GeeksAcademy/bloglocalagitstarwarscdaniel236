@@ -1,0 +1,35 @@
+.theCards{
+    width: 300px;
+    background: #383737;
+    color: aliceblue;
+}
+.dropdown{
+    position: relative;
+    top: -30px;
+    background:rgb(39, 226, 29) ;
+    box-shadow: 0 0 10px rgb(39, 226, 29),
+    0 0 20px rgb(39, 226, 29),
+    0 0 24px rgb(39, 226, 29);
+}
+.StarWarsTittle{
+    display: block;
+    font-family: jedi-outline;
+}
+body{
+    background: #000000;
+}
+#TheNav{
+    height: 80px;
+    background-image: url("https://e1.pxfuel.com/desktop-wallpaper/549/675/desktop-wallpaper-star-wars-star-backgrounds-%C2%B7%E2%91%A0-star-background.jpg");
+    }
+.logo{
+    position: relative;
+       top: -30px
+}
+.col{
+    border-left-color: yellow;
+    border-right-color: yellow;
+}
+a{
+    text-decoration: none;
+}
