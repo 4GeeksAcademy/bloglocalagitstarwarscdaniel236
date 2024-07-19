@@ -35,13 +35,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 							const responseEachCharacter = await fetch(`https://www.swapi.tech/api/people/${character.uid}`);
 							const characterData = await responseEachCharacter.json();
 							if (responseEachCharacter.ok) {
-								charactersData.push(characterData.result);
+								charactersData.push(characterData.result); // Guardamos todo el objeto result en charactersData
 							}
 						}
 						setStore({ characters: charactersData });
 						return true;
 					}
-					setStore({ characters: false });
+					setStore({ characters: false }); 
 					return false;
 				} catch (e) {
 					console.error("An error happened fetching characters data", e);
@@ -50,43 +50,47 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			fetchPlanetsData: async () => {
+			fetchPlanetsData: async() => {
 				try {
 					const response = await fetch("https://www.swapi.tech/api/planets");
 					const data = await response.json();
-					console.log(data);
-					if (response.ok) {
+					console.log(data)
+					if(response.ok){
 						const planetsData = [];
-						for (const planet of data.results) {
-							const responseEachPlanet = await fetch(`https://www.swapi.tech/api/planets/${planet.uid}`);
-							const planetData = await responseEachPlanet.json();
-							if (responseEachPlanet.ok) {
-								planetsData.push(planetData.result);
+						for (const planet of data.results){
+							const responseEachPlanet = await fetch(`https://www.swapi.tech/api/planets/${planet.uid}`)//llamada info de la API
+							const planetData = await responseEachPlanet.json();// traduccioón de json a js
+							if(responseEachPlanet.ok){ //si la respuesta del llamado a la API es ok 
+								planetsData.push(planetData.result) //se guarda todo en el array de planetsData
 							}
 						}
-						console.log(planetsData);
-						setStore({ planets: planetsData });
+						console.log(planetsData)
+						setStore({planets: planetsData});
 					}
-					console.log(getStore().planets);
-				} catch (e) {
-					console.error("An error happened fetching planets data", e);
-					setStore({ planets: false });
-					return false;
+					console.log(getStore().planets) 
+				}catch(e){
+					console.error("An error happended fetching planets data",e)
+					setStore({planets: false})
+					return false
 				}
 			},
+			
+			addFavorite: (name, uid)=>{
+				const store = getStore()
 
-			addFavorite: (name, uid) => {
-				const store = getStore();
-				setStore({ favorites: [...store.favorites, { name: name, uid: uid }] });
+				setStore({favorites: [...store.favorites, {"name": name, "uid": uid}]})
+			},
+			deleteFavorite: (name)=>{
+				const store = getStore()
+
+				setStore({favorites: store.favorites.filter(item => item.name != name)}) //retorna mismo array pero con nombre distinto al que quiero borrar
 			},
 
-			deleteFavorite: (name) => {
-				const store = getStore();
-				setStore({ favorites: store.favorites.filter(item => item.name !== name) });
-			},
 
 			changeColor: (index, color) => {
+				//get the store
 				const store = getStore();
+
 				const demo = store.demo.map((elm, i) => {
 					if (i === index) elm.background = color;
 					return elm;
@@ -98,4 +102,5 @@ const getState = ({ getStore, getActions, setStore }) => {
 };
 
 export default getState;
+
 

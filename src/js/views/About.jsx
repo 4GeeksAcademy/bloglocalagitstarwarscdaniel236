@@ -7,7 +7,7 @@ export const About = () => {
     const { store } = useContext(Context);
     const { uid } = useParams();
 
-    const character = store.characters.find(character => character.uid == uid); //character va a ser igual a la propiedad uid que tiene characters dentro de la información contenida en el store
+    const character = store.characters.find(character => character.uid == uid);
 
     if (!character) {
         return <div>We couldn't find the character</div>
